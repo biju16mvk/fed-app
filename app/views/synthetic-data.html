@@ -1,0 +1,15 @@
+<!-- <div class="crumbs"></div> -->
+<div class="page-header">
+	<div class="page-title uc-first"><h3>{{pageHeading}}</h3></div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<label class="pull-left">Choose a File:&nbsp;&nbsp;&nbsp;</label>
+		<select class="form-control input-width-medium" ng-model="fileName" ng-change="loadSyntheticData()">
+			<option ng-repeat="(fileName, file) in files" value="{{fileName}}">{{fileName}}</option>
+		</select>
+	</div>
+</div>
+<div class="row margin-top-10" ng-if="fileName">
+	<div class="col-sm-12" hljs source="fedIfmData">Loading..</div>
+</div>

@@ -1,0 +1,30 @@
+<div id="sidebar" class="sidebar-fixed" ng-controller="LeftSidebarCtrl">
+   <div id="sidebar-content">
+    <ul id="nav">
+      <li ng-repeat="menu in navigationMenu.items" ng-class="{current: currentTab===menu.name}">
+        <a ng-href="#/{{menu.path}}">
+        <i class="icon-{{menu.iconType}}"></i>
+        {{menu.name}}
+        <span class="label label-info pull-right" ng-if="menu.count">{{menu.count}}</span>
+        </a>
+        <ul class="sub-menu" ng-if="menu.subMenu">
+          <li ng-repeat="subMenu in menu.subMenu.items" ng-class="{current: currentSubTab===subMenu.name}">
+            <a ng-href="#/{{subMenu.path}}">
+            <i class="icon-{{subMenu.iconType}}" ng-class="{'icon-angle-right':!subMenu.iconType}"></i>
+            {{subMenu.name}}
+            </a>
+            <ul class="sub-menu" ng-if="subMenu.manageMenu">
+              <li ng-repeat="manageMenu in subMenu.manageMenu.items" ng-class="{current: currentManageTab===manageMenu.name}">
+                <a ng-href="#/{{manageMenu.path}}">
+                <i class="icon-angle-right"></i>
+                {{manageMenu.name}}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+   </div>
+   <div id="divider" class="resizeable"></div>
+</div>

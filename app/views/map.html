@@ -1,0 +1,11 @@
+<div ng-if="sites">
+	<map style="display:block;height:600px" zoom="11" center="[{{sites[0].Lattitude}} ,  {{sites[0].Longitude}}]">
+	<marker ng-repeat="site in sites" position="[{{site.Lattitude}}, {{site.Longitude}}]" on-click="showInfoWindow(event, 'marker-info', {site: site})"/>
+	<!-- <shape name="circle" radius="400" center="[40.74,-74.18]" radius="4000" /> -->
+	<!-- <control name="overviewMap" opened="true" /> -->
+	<info-window id="marker-info">
+	<!-- <span><img src="app/images/[[site.SiteID]].jpg"/></span> -->
+	<h4> <a href="#/facilities/site-dashboard/[[site.SiteID]]">[[site.Number]] - [[site.Name]]</a></h4>
+	</info-window>
+	</map>
+</div>

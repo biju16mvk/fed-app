@@ -1,0 +1,87 @@
+<!-- <div class="crumbs"></div> -->
+<div class="page-header">
+	<div class="page-title uc-first"><h3>{{pageHeading}}</h3></div>
+</div>
+<div class="row">
+	<div class="col-sm-5">
+		<div class="row">
+			<label class="col-sm-4">Site Name:</label>
+			<div class="col-sm-8" ng-bind="site.Name"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Site Number:</label>
+			<div class="col-sm-8" ng-bind="site.Number"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Short Name:</label>
+			<div class="col-sm-8" ng-bind="site.NameShort"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">RPUID Site:</label>
+			<div class="col-sm-8" ng-bind="site.RealPropertySiteUniqueIdentifier"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Area:</label>
+			<div class="col-sm-8" ng-bind="site.Area"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Address:</label>
+			<div class="col-sm-8">{{address.Street1}}<br>{{address.Street2}}<br>{{address.City}}, {{address.State}}<br>{{address.Country}}</div>
+		</div>
+	</div>
+	<div class="col-sm-7">
+		<div class="row">
+			<label class="col-sm-4">Installation:</label>
+			<div class="col-sm-8" ng-bind="installation.Name"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Installation Code:</label>
+			<div class="col-sm-8" ng-bind="installation.Code"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Tricare Region:</label>
+			<div class="col-sm-8" ng-bind="installation.Region"></div>
+		</div>
+		<div class="row">
+			<label class="col-sm-4">Agency:</label>
+			<div class="col-sm-8" ng-bind="service.ServiceName"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<h4>Organizations</h4>
+				<div class="organization-data-grid" ng-grid="organizationDataGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-5">
+		<fusion-chart type="pie2d" width="101%" height="300" id="chart-container"></fusion-chart>
+		<bar-chart id="chart-bars-vertical"></bar-chart>
+	</div>
+	<div class="col-sm-7">
+		<h4>{{site.Lattitude}} / {{site.Longitude}}</h4>
+		<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{siteMapViewUrl}}"></iframe>
+		<h4>Map Site View (Google / ESRI)</h4>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-3">
+		<h4>Filter/Search</h4>
+		<div class="form-group">
+			<select class="form-control" ng-model="selectedInstallationId" ng-change="loadSites()">
+				<option ng-repeat="installation in installations" value="{{installation.InstallationID}}" ng-selected="installation.InstallationID==selectedInstallationId">{{installation.Name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select class="form-control" ng-model="selectedSiteId" ng-change="loadSite()" ng-options="site.SiteID as site.Name for site in sites">
+				<option value="">Please Select</option>
+				<!-- <option ng-repeat="site in sites" value="{{site.SiteID}}" ng-selected="site.SiteID==selectedSiteId">{{site.Name}}</option> -->
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-9">
+		<h4>Facilities(Click name to review facility)</h4>
+		<div class="facility-data-grid" ng-grid="facilityDataGridOptions"></div>
+	</div>
+</div>

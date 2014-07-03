@@ -1,0 +1,151 @@
+<div class="page-header">
+  <div class="page-title uc-first"><h3>{{pageHeading}}</h3></div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row">
+      <label class="col-sm-2">Site:</label>
+      <div class="col-sm-10" ng-bind="site.Name"></div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <label class="col-sm-2">Facility:</label>
+      <div class="col-sm-10"> {{facility.Number}} - {{facility.Name}}</div>
+    </div>
+  </div>
+</div>
+<form role="form" class="form-horizontal">
+  <div class="row">
+    <div class="col-sm-4">
+      <h4> Space / Room Data </h4>
+      <div class="form-group">
+        <label class="col-sm-4">Number:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="space.BlueprintRoomNumber" placeholder="BlueprintRoomNumber">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">Name:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="space.Name" placeholder="Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">RoomCode:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="space.OrganizationRoomNumber" placeholder="OrganizationRoomNumber">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">Classification:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="space.Classification" placeholder="Classification">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">Net Area:</label>
+        <div class="col-sm-8" ng-bind="space.NetArea"></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">Floor:</label>
+        <div class="col-sm-8" ng-bind="floor.Name"></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h4> Assessment </h4>
+      <div class="scroll-dv">
+        <div class="row">
+          <div class="col-sm-6">Floor Material&nbsp;&nbsp;:</div>
+          <div class="col-sm-6" ng-bind="attributeSpaceFloorFinish.Value">></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">Floor Color&nbsp;&nbsp;:</div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">Floor Reflectance&nbsp;&nbsp;:</div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h4> Requirements </h4>
+      <div class="scroll-dv">
+        <div class="row">
+          <div class="col-sm-7">Floor Material&nbsp;&nbsp;:</div>
+          <div class="col-sm-5" ng-bind="attributeSpaceFloorFinish.Value">></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7">Floor Finish&nbsp;&nbsp;:</div>
+          <div class="col-sm-5" ng-bind="attributeSpaceFloorFinish.Value">></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7">Floor Finish Alternate&nbsp;&nbsp;:</div>
+          <div class="col-sm-5"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <h4> Use Type </h4>
+      <div class="form-group">
+        <label class="col-sm-4">Design Capacity:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" placeholder="Design Capacity" ng-model="attributeSpaceCapacity.Value">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4">Occupancy:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" placeholder="Occupancy" ng-model="attributeSpaceOccupancy.Value">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-actions">
+        <button class="btn btn-primary pull-right btn-lg" ng-click="updateSpaceData()">Update Space Data</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="col-sm-3">
+  </div>
+  <div class="col-sm-5">
+    <h3 class="text-center"> Select Space in Plan or in List or by Scanning the QR Code on the door </h3>
+  </div>
+  <div class="col-sm-4">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="floor-data-grid" ng-grid="floorDataGridOptions"></div>
+  </div>
+  <div class="col-sm-5">
+    <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{floorMapUrl}}"></iframe>
+  </div>
+  <div class="col-sm-4">
+    <div class="floor-space-data-grid" ng-grid="floorSpaceDataGridOptions"></div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="color-coded-plan-data-grid" ng-grid="colorCodedPlanDataGridOptions"></div>
+  </div>
+  <div class="col-sm-7">
+    <iframe width="100%" height="550" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{colorCodedMapUrl}}"></iframe>
+  </div>
+  <div class="col-sm-2" style="padding-left:6px;padding-right:6px;">
+    <div class="floor-space-data-grid" ng-grid="colorCodedLegendDataGridOptions"></div>
+    <!-- <h4>Legend:</h4>
+    <div class="scroll-dv-legend">
+      <div class="row" ng-repeat="colorCodedLegend in colorCodedLegends">      
+        <div class="col-sm-9">{{colorCodedLegend.Value}}</div>
+        <div class="col-sm-2" style="background-color:{{colorCodedLegend.Color}}">&nbsp;</div>
+      </div>
+    </div> -->
+  </div>
+</div>
